@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,8 +31,6 @@ import static org.junit.Assert.assertTrue;
 public class LDAPAuthenticatorTest extends AbstractLdapTestUnit
 {
 
-
-	private LdapTemplate ldapTemplate;
 
 	@Test
 	public void givenValidPrincipalAndCredentials_whenAuthenticateUser_thenReturnTrue() throws NamingException
