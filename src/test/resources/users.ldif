@@ -1,0 +1,44 @@
+version: 1
+dn: dc=plug,dc=com
+objectClass: domain
+objectClass: top
+dc: plug
+
+dn: ou=Users,dc=plug,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: Users
+
+dn: cn=Admin,ou=Users,dc=plug,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Admin
+ou: Admins
+sn: Nimda
+uid: admin1
+userPassword: 1234567
+
+dn: cn=Pepe Pompin,ou=Users,dc=plug,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Pepe Pompin
+sn: Pompin
+ou: Operations
+ou: Users
+uid: user1
+userPassword: 12345
+
+dn: cn=Pepa Pompin,ou=Users,dc=plug,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Pepa Pompin
+sn: Pompin
+ou: Payroll
+uid: user2
+userPassword: 678910
