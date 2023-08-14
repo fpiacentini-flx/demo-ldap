@@ -17,7 +17,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.naming.AuthenticationException;
-import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 
 import static org.junit.Assert.assertEquals;
@@ -39,9 +38,9 @@ public class LDAPAuthenticatorTest extends AbstractLdapTestUnit
 	@Test
 	public void givenValidPrincipalAndCredentials_whenAuthenticateUser_thenReturnTrue() throws NamingException
 	{
-		LDAPAuthenticator ldapAuthenticator = new LDAPAuthenticator("localhost", "10390", "cn=Admin,ou=Users,dc=plug,dc=com", "1234567");
+		LDAPAuthenticator ldapAuthenticator = new LDAPAuthenticator("localhost", "10390", "cn=Admin,ou=Users,dc=plug,dc=com", "1234567", "cn=", ",ou=Users,dc=plug,dc=com");
 		Authentication authenticated = ldapAuthenticator.authenticate(
-				new UsernamePasswordAuthenticationToken("cn=Pepe Pompin,ou=Users,dc=plug,dc=com", "12345"));
+				new UsernamePasswordAuthenticationToken("Pepe Pompin", "12345"));
 		assertNotNull(authenticated);
 		assertTrue(authenticated.getAuthorities().contains(new SimpleGrantedAuthority("Operations")));
 		assertTrue(authenticated.getAuthorities().contains(new SimpleGrantedAuthority("Users")));
@@ -51,17 +50,17 @@ public class LDAPAuthenticatorTest extends AbstractLdapTestUnit
 	@Test(expected = AuthenticationException.class)
 	public void givenValidPrincipalAndInvalidCredentials_whenAuthenticateUser_thenShouldThrowException() throws NamingException
 	{
-		LDAPAuthenticator ldapAuthenticator = new LDAPAuthenticator("localhost", "10390", "cn=Admin,ou=Users,dc=plug,dc=com", "1234567");
+		LDAPAuthenticator ldapAuthenticator = new LDAPAuthenticator("localhost", "10390", "cn=Admin,ou=Users,dc=plug,dc=com", "1234567", "cn=", ",ou=Users,dc=plug,dc=com");
 		ldapAuthenticator.authenticate(
-				new UsernamePasswordAuthenticationToken("cn=Pepe Pompin,ou=Users,dc=plug,dc=com", "678910"));
+				new UsernamePasswordAuthenticationToken("Pepe Pompin", "678910"));
 
 	}
 
 	@Test(expected = AuthenticationException.class)
 	public void givenInvalidPrincipal_whenAuthenticateUser_thenShouldThrowException() throws NamingException
 	{
-		LDAPAuthenticator ldapAuthenticator = new LDAPAuthenticator("localhost", "10390", "cn=Admin,ou=Users,dc=plug,dc=com", "1234567");
-		ldapAuthenticator.authenticate(new UsernamePasswordAuthenticationToken("cn=Pipi Pompin,ou=Users,dc=plug,dc=com", "12345"));
+		LDAPAuthenticator ldapAuthenticator = new LDAPAuthenticator("localhost", "10390", "cn=Admin,ou=Users,dc=plug,dc=com", "1234567", "cn=", ",ou=Users,dc=plug,dc=com");
+		ldapAuthenticator.authenticate(new UsernamePasswordAuthenticationToken("Pipi Pompin", "12345"));
 	}
 
 
